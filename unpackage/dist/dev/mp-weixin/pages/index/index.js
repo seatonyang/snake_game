@@ -40,7 +40,7 @@ const _sfc_main = {
     try {
       this.screenInfo = common_vendor.index.getSystemInfoSync();
     } catch (error) {
-      common_vendor.index.__f__("error", "at pages/index/index.vue:139", "获取屏幕信息失败:", error);
+      common_vendor.index.__f__("error", "at pages/index/index.vue:180", "获取屏幕信息失败:", error);
       this.screenInfo = {
         windowWidth: 375,
         windowHeight: 667
@@ -196,7 +196,7 @@ const _sfc_main = {
       if (!this.joystickActive)
         return;
       if (!this.screenInfo) {
-        common_vendor.index.__f__("warn", "at pages/index/index.vue:348", "屏幕信息未初始化");
+        common_vendor.index.__f__("warn", "at pages/index/index.vue:389", "屏幕信息未初始化");
         return;
       }
       const touchX = e.touches[0].clientX;

@@ -11,6 +11,9 @@
 
 		<!-- 游戏画布 -->
 		<view class="game-board" ref="gameBoard">
+			<!-- 网格背景 -->
+			<view class="grid-background"></view>
+			
 			<!-- 蛇身 -->
 			<view 
 				v-for="(segment, index) in snake" 
@@ -70,26 +73,64 @@
 		<!-- 关于弹窗 -->
 		<view v-if="aboutVisible" class="about-popup" @click="hideAbout">
 			<view class="about-content" @click.stop>
-				<text class="about-title">关于贪吃蛇</text>
+				<!-- 装饰图标 -->
+				<view class="decoration-top">
+					<text class="decoration-icon">🐍</text>
+				</view>
+				
+				<!-- 标题 -->
+				<view class="title-container">
+					<text class="about-title">🎮 关于贪吃蛇 🎮</text>
+					<text class="subtitle">经典重现，童年回忆</text>
+				</view>
+				
+				<!-- 分隔线 -->
+				<view class="divider"></view>
+				
+				<!-- 信息区域 -->
 				<view class="about-info">
 					<view class="info-item">
-						<text class="info-label">作者</text>
-						<text class="info-value">Seaton</text>
+						<text class="info-icon">👨‍💻</text>
+						<view class="info-text">
+							<text class="info-label">✨ 作者</text>
+							<text class="info-value">Seaton</text>
+						</view>
 					</view>
+					
 					<view class="info-item">
-						<text class="info-label">版本号</text>
-						<text class="info-value">v1.0.0</text>
+						<text class="info-icon">📦</text>
+						<view class="info-text">
+							<text class="info-label">🏷️ 版本号</text>
+							<text class="info-value">v1.0.0</text>
+						</view>
 					</view>
+					
 					<view class="info-item">
-						<text class="info-label">发布时间</text>
-						<text class="info-value">2026年2月</text>
+						<text class="info-icon">📅</text>
+						<view class="info-text">
+							<text class="info-label">🗓️ 发布时间</text>
+							<text class="info-value">2026年2月</text>
+						</view>
 					</view>
+					
 					<view class="info-item">
-						<text class="info-label">游戏说明</text>
-						<text class="info-desc">使用摇杆控制蛇的移动方向，吃到食物可以得分，撞到墙壁或自身游戏结束。快来挑战最高分吧！</text>
+						<text class="info-icon">🎯</text>
+						<view class="info-text">
+							<text class="info-label">📖 游戏说明</text>
+							<text class="info-desc">🐍 使用摇杆控制蛇的移动方向\n🍎 吃到食物可以得分\n⚠️ 撞到墙壁或自身游戏结束\n\n💪 快来挑战最高分吧！</text>
+						</view>
 					</view>
 				</view>
-				<button class="close-btn" @click="hideAbout">关闭</button>
+				
+				<!-- 底部装饰 -->
+				<view class="footer">
+					<text class="footer-text">Made with ❤️</text>
+				</view>
+				
+				<!-- 关闭按钮 -->
+				<view class="btn-container">
+					<button class="close-btn" @click="hideAbout">🚀 开始游戏</button>
+				</view>
 			</view>
 		</view>
 	</view>
@@ -502,6 +543,21 @@
 		box-shadow: 0 0 20rpx rgba(0, 255, 255, 0.3);
 	}
 
+	/* 网格背景 */
+	.grid-background {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-image: 
+			linear-gradient(rgba(0, 255, 255, 0.1) 1rpx, transparent 1rpx),
+			linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1rpx, transparent 1rpx);
+		background-size: 20rpx 20rpx;
+		pointer-events: none;
+		z-index: 0;
+	}
+
 	/* 蛇身 */
 	.snake-segment {
 		position: absolute;
@@ -676,77 +732,207 @@
 		left: 0;
 		width: 100%;
 		height: 100%;
-		background-color: rgba(0, 0, 0, 0.7);
+		background-color: rgba(0, 0, 0, 0.8);
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		z-index: 1000;
+		backdrop-filter: blur(10rpx);
 	}
 
 	/* 弹窗内容 */
 	.about-content {
-		width: 80%;
-		max-width: 600rpx;
-		background-color: #1E1E1E;
-		border: 2rpx solid #00FFFF;
-		border-radius: 20rpx;
-		padding: 40rpx;
-		box-shadow: 0 0 30rpx rgba(0, 255, 255, 0.3);
+		width: 85%;
+		max-width: 650rpx;
+		background: linear-gradient(145deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+		border: 3rpx solid;
+		border-image: linear-gradient(45deg, #00FFFF, #FF00FF, #00FFFF) 1;
+		border-radius: 30rpx;
+		padding: 50rpx 40rpx;
+		box-shadow: 
+			0 0 40rpx rgba(0, 255, 255, 0.4),
+			0 0 80rpx rgba(255, 0, 255, 0.2),
+			inset 0 0 30rpx rgba(0, 0, 0, 0.5);
+		position: relative;
+		overflow: hidden;
+	}
+
+	/* 弹窗内容顶部装饰 */
+	.about-content::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 5rpx;
+		background: linear-gradient(90deg, #00FFFF, #FF00FF, #00FFFF);
+	}
+
+	/* 装饰图标 */
+	.decoration-top {
+		text-align: center;
+		margin-bottom: 20rpx;
+	}
+
+	.decoration-icon {
+		font-size: 80rpx;
+		display: inline-block;
+		animation: float 3s ease-in-out infinite;
+	}
+
+	@keyframes float {
+		0%, 100% { transform: translateY(0); }
+		50% { transform: translateY(-15rpx); }
+	}
+
+	/* 标题容器 */
+	.title-container {
+		text-align: center;
+		margin-bottom: 30rpx;
 	}
 
 	/* 弹窗标题 */
 	.about-title {
 		display: block;
-		font-size: 40rpx;
-		font-weight: bold;
-		color: #00FFFF;
-		text-align: center;
-		margin-bottom: 30rpx;
-		text-shadow: 0 0 10rpx #00FFFF;
+		font-size: 52rpx;
+		font-weight: 900;
+		background: linear-gradient(90deg, #00FFFF, #00FF00, #FFFF00);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+		text-shadow: none;
+		margin-bottom: 15rpx;
+		letter-spacing: 4rpx;
+	}
+
+	/* 副标题 */
+	.subtitle {
+		display: block;
+		font-size: 26rpx;
+		color: #888888;
+		font-style: italic;
+		letter-spacing: 2rpx;
+	}
+
+	/* 分隔线 */
+	.divider {
+		height: 2rpx;
+		background: linear-gradient(90deg, transparent, #00FFFF, transparent);
+		margin: 30rpx 0;
+		position: relative;
+	}
+
+	.divider::before {
+		content: '⭐';
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		font-size: 24rpx;
+		background: #1a1a2e;
+		padding: 0 15rpx;
 	}
 
 	/* 信息区域 */
 	.about-info {
-		margin-bottom: 30rpx;
+		margin-bottom: 35rpx;
 	}
 
 	/* 信息项 */
 	.info-item {
-		margin-bottom: 20rpx;
+		display: flex;
+		align-items: flex-start;
+		margin-bottom: 25rpx;
+		padding: 15rpx;
+		background: rgba(255, 255, 255, 0.05);
+		border-radius: 15rpx;
+		transition: all 0.3s ease;
+	}
+
+	.info-item:hover {
+		background: rgba(0, 255, 255, 0.1);
+		transform: translateX(10rpx);
+	}
+
+	/* 信息图标 */
+	.info-icon {
+		font-size: 40rpx;
+		margin-right: 20rpx;
+		flex-shrink: 0;
+	}
+
+	/* 信息文本容器 */
+	.info-text {
+		flex: 1;
 	}
 
 	/* 信息标签 */
 	.info-label {
 		display: block;
-		font-size: 26rpx;
+		font-size: 24rpx;
 		color: #888888;
 		margin-bottom: 8rpx;
+		font-weight: 600;
 	}
 
 	/* 信息值 */
 	.info-value {
 		display: block;
-		font-size: 30rpx;
+		font-size: 32rpx;
 		color: #00FF00;
+		font-weight: bold;
+		text-shadow: 0 0 10rpx rgba(0, 255, 0, 0.5);
 	}
 
 	/* 描述文字 */
 	.info-desc {
 		display: block;
-		font-size: 28rpx;
+		font-size: 26rpx;
 		color: #CCCCCC;
-		line-height: 1.6;
+		line-height: 2;
+		white-space: pre-line;
+	}
+
+	/* 底部装饰 */
+	.footer {
+		text-align: center;
+		margin-bottom: 25rpx;
+		padding-top: 20rpx;
+		border-top: 1rpx solid rgba(255, 255, 255, 0.1);
+	}
+
+	.footer-text {
+		font-size: 24rpx;
+		color: #666666;
+		letter-spacing: 3rpx;
+	}
+
+	/* 按钮容器 */
+	.btn-container {
+		margin-top: 20rpx;
 	}
 
 	/* 关闭按钮 */
 	.close-btn {
 		width: 100%;
-		padding: 20rpx;
-		background-color: rgba(0, 255, 255, 0.2);
-		border: 1rpx solid #00FFFF;
-		border-radius: 40rpx;
-		color: #00FFFF;
-		font-size: 32rpx;
+		padding: 25rpx 40rpx;
+		background: linear-gradient(135deg, rgba(0, 255, 255, 0.3), rgba(255, 0, 255, 0.3));
+		border: 2rpx solid #00FFFF;
+		border-radius: 50rpx;
+		color: #FFFFFF;
+		font-size: 34rpx;
 		font-weight: bold;
+		letter-spacing: 4rpx;
+		box-shadow: 
+			0 0 20rpx rgba(0, 255, 255, 0.4),
+			inset 0 0 20rpx rgba(255, 255, 255, 0.1);
+		transition: all 0.3s ease;
+	}
+
+	.close-btn:active {
+		transform: scale(0.95);
+		box-shadow: 
+			0 0 10rpx rgba(0, 255, 255, 0.6),
+			inset 0 0 30rpx rgba(0, 0, 0, 0.3);
 	}
 </style>
