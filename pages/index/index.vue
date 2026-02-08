@@ -3,7 +3,10 @@
 		<!-- 游戏标题和分数 -->
 		<view class="game-header">
 			<text class="game-title">贪吃蛇</text>
-			<text class="score">分数: {{ score }}</text>
+			<view class="header-right">
+				<text class="score">分数: {{ score }}</text>
+				<button class="about-btn" @click="showAbout">关于</button>
+			</view>
 		</view>
 
 		<!-- 游戏画布 -->
@@ -63,6 +66,32 @@
 				</view>
 			</view>
 		</view>
+
+		<!-- 关于弹窗 -->
+		<view v-if="aboutVisible" class="about-popup" @click="hideAbout">
+			<view class="about-content" @click.stop>
+				<text class="about-title">关于贪吃蛇</text>
+				<view class="about-info">
+					<view class="info-item">
+						<text class="info-label">作者</text>
+						<text class="info-value">Seaton</text>
+					</view>
+					<view class="info-item">
+						<text class="info-label">版本号</text>
+						<text class="info-value">v1.0.0</text>
+					</view>
+					<view class="info-item">
+						<text class="info-label">发布时间</text>
+						<text class="info-value">2026年2月</text>
+					</view>
+					<view class="info-item">
+						<text class="info-label">游戏说明</text>
+						<text class="info-desc">使用摇杆控制蛇的移动方向，吃到食物可以得分，撞到墙壁或自身游戏结束。快来挑战最高分吧！</text>
+					</view>
+				</view>
+				<button class="close-btn" @click="hideAbout">关闭</button>
+			</view>
+		</view>
 	</view>
 </template>
 
@@ -97,7 +126,9 @@
 				// 移动速度
 				speed: 150,
 				// 屏幕尺寸信息
-				screenInfo: null
+				screenInfo: null,
+				// 关于弹窗可见性
+				aboutVisible: false
 			}
 		},
 		mounted() {
@@ -336,7 +367,7 @@
 				const deltaY = touchY - baseCenterY;
 
 				// 限制摇杆移动范围
-				const maxDistance = 75; // 摇杆最大移动距离（扩大1.5倍）
+				const maxDistance = 112; // 摇杆最大移动距离（扩大1.5倍）
 				const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
 				const ratio = distance > maxDistance ? maxDistance / distance : 1;
 
@@ -389,6 +420,16 @@
 				this.joystickActive = false;
 				// 重置摇杆位置
 				this.joystickPos = { x: 0, y: 0 };
+			},
+
+			// 显示关于弹窗
+			showAbout() {
+				this.aboutVisible = true;
+			},
+
+			// 隐藏关于弹窗
+			hideAbout() {
+				this.aboutVisible = false;
 			},
 
 			// 获取蛇身段的颜色（渐变色）
@@ -582,8 +623,8 @@
 
 	.joystick-base {
 		position: relative;
-		width: 225rpx; /* 扩大1.5倍 */
-		height: 225rpx; /* 扩大1.5倍 */
+		width: 337rpx; /* 扩大1.5倍 */
+		height: 337rpx; /* 扩大1.5倍 */
 		background-color: rgba(51, 51, 51, 0.5);
 		border-radius: 50%;
 		border: 2rpx solid #555555;
@@ -593,11 +634,11 @@
 		position: absolute;
 		top: 50%;
 		left: 50%;
-		width: 90rpx; /* 扩大1.5倍 */
-		height: 90rpx; /* 扩大1.5倍 */
+		width: 135rpx; /* 扩大1.5倍 */
+		height: 135rpx; /* 扩大1.5倍 */
 		background-color: #00FFFF;
 		border-radius: 50%;
-		box-shadow: 0 0 15rpx #00FFFF; /* 阴影也相应扩大 */
+		box-shadow: 0 0 22rpx #00FFFF; /* 阴影也相应扩大 */
 	}
 
 	/* 按钮样式 */
@@ -609,5 +650,103 @@
 
 	button::after {
 		border: none;
+	}
+
+	/* 标题栏右侧 */
+	.header-right {
+		display: flex;
+		align-items: center;
+		gap: 20rpx;
+	}
+
+	/* 关于按钮 */
+	.about-btn {
+		padding: 10rpx 30rpx;
+		background-color: rgba(0, 255, 255, 0.2);
+		border: 1rpx solid #00FFFF;
+		border-radius: 30rpx;
+		color: #00FFFF;
+		font-size: 24rpx;
+	}
+
+	/* 关于弹窗 */
+	.about-popup {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0, 0, 0, 0.7);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		z-index: 1000;
+	}
+
+	/* 弹窗内容 */
+	.about-content {
+		width: 80%;
+		max-width: 600rpx;
+		background-color: #1E1E1E;
+		border: 2rpx solid #00FFFF;
+		border-radius: 20rpx;
+		padding: 40rpx;
+		box-shadow: 0 0 30rpx rgba(0, 255, 255, 0.3);
+	}
+
+	/* 弹窗标题 */
+	.about-title {
+		display: block;
+		font-size: 40rpx;
+		font-weight: bold;
+		color: #00FFFF;
+		text-align: center;
+		margin-bottom: 30rpx;
+		text-shadow: 0 0 10rpx #00FFFF;
+	}
+
+	/* 信息区域 */
+	.about-info {
+		margin-bottom: 30rpx;
+	}
+
+	/* 信息项 */
+	.info-item {
+		margin-bottom: 20rpx;
+	}
+
+	/* 信息标签 */
+	.info-label {
+		display: block;
+		font-size: 26rpx;
+		color: #888888;
+		margin-bottom: 8rpx;
+	}
+
+	/* 信息值 */
+	.info-value {
+		display: block;
+		font-size: 30rpx;
+		color: #00FF00;
+	}
+
+	/* 描述文字 */
+	.info-desc {
+		display: block;
+		font-size: 28rpx;
+		color: #CCCCCC;
+		line-height: 1.6;
+	}
+
+	/* 关闭按钮 */
+	.close-btn {
+		width: 100%;
+		padding: 20rpx;
+		background-color: rgba(0, 255, 255, 0.2);
+		border: 1rpx solid #00FFFF;
+		border-radius: 40rpx;
+		color: #00FFFF;
+		font-size: 32rpx;
+		font-weight: bold;
 	}
 </style>

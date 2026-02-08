@@ -31,14 +31,16 @@ const _sfc_main = {
       // 移动速度
       speed: 150,
       // 屏幕尺寸信息
-      screenInfo: null
+      screenInfo: null,
+      // 关于弹窗可见性
+      aboutVisible: false
     };
   },
   mounted() {
     try {
       this.screenInfo = common_vendor.index.getSystemInfoSync();
     } catch (error) {
-      common_vendor.index.__f__("error", "at pages/index/index.vue:108", "获取屏幕信息失败:", error);
+      common_vendor.index.__f__("error", "at pages/index/index.vue:139", "获取屏幕信息失败:", error);
       this.screenInfo = {
         windowWidth: 375,
         windowHeight: 667
@@ -194,7 +196,7 @@ const _sfc_main = {
       if (!this.joystickActive)
         return;
       if (!this.screenInfo) {
-        common_vendor.index.__f__("warn", "at pages/index/index.vue:317", "屏幕信息未初始化");
+        common_vendor.index.__f__("warn", "at pages/index/index.vue:348", "屏幕信息未初始化");
         return;
       }
       const touchX = e.touches[0].clientX;
@@ -205,7 +207,7 @@ const _sfc_main = {
       const baseCenterY = windowHeight - 150;
       const deltaX = touchX - baseCenterX;
       const deltaY = touchY - baseCenterY;
-      const maxDistance = 75;
+      const maxDistance = 112;
       const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
       const ratio = distance > maxDistance ? maxDistance / distance : 1;
       this.joystickPos = {
@@ -240,6 +242,14 @@ const _sfc_main = {
       this.joystickActive = false;
       this.joystickPos = { x: 0, y: 0 };
     },
+    // 显示关于弹窗
+    showAbout() {
+      this.aboutVisible = true;
+    },
+    // 隐藏关于弹窗
+    hideAbout() {
+      this.aboutVisible = false;
+    },
     // 获取蛇身段的颜色（渐变色）
     getSegmentColor(index) {
       const totalSegments = this.snake.length;
@@ -257,7 +267,8 @@ const _sfc_main = {
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return common_vendor.e({
     a: common_vendor.t($data.score),
-    b: common_vendor.f($data.snake, (segment, index, i0) => {
+    b: common_vendor.o((...args) => $options.showAbout && $options.showAbout(...args)),
+    c: common_vendor.f($data.snake, (segment, index, i0) => {
       return {
         a: index,
         b: segment.x * $data.gridSize + "rpx",
@@ -265,26 +276,32 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         d: $options.getSegmentColor(index)
       };
     }),
-    c: $data.food
+    d: $data.food
   }, $data.food ? {
-    d: $data.food.x * $data.gridSize + "rpx",
-    e: $data.food.y * $data.gridSize + "rpx"
+    e: $data.food.x * $data.gridSize + "rpx",
+    f: $data.food.y * $data.gridSize + "rpx"
   } : {}, {
-    f: $data.gameState === "start"
+    g: $data.gameState === "start"
   }, $data.gameState === "start" ? {
-    g: common_vendor.o((...args) => $options.startGame && $options.startGame(...args))
+    h: common_vendor.o((...args) => $options.startGame && $options.startGame(...args))
   } : {}, {
-    h: $data.gameState === "over"
+    i: $data.gameState === "over"
   }, $data.gameState === "over" ? {
-    i: common_vendor.t($data.score),
-    j: common_vendor.o((...args) => $options.restartGame && $options.restartGame(...args))
+    j: common_vendor.t($data.score),
+    k: common_vendor.o((...args) => $options.restartGame && $options.restartGame(...args))
   } : {}, {
-    k: `translate(${$data.joystickPos.x}rpx, ${$data.joystickPos.y}rpx) translate(-50%, -50%)`,
-    l: common_vendor.o((...args) => $options.touchStart && $options.touchStart(...args)),
-    m: common_vendor.o((...args) => $options.touchMove && $options.touchMove(...args)),
-    n: common_vendor.o((...args) => $options.touchEnd && $options.touchEnd(...args)),
-    o: common_vendor.o((...args) => $options.touchEnd && $options.touchEnd(...args))
-  });
+    l: `translate(${$data.joystickPos.x}rpx, ${$data.joystickPos.y}rpx) translate(-50%, -50%)`,
+    m: common_vendor.o((...args) => $options.touchStart && $options.touchStart(...args)),
+    n: common_vendor.o((...args) => $options.touchMove && $options.touchMove(...args)),
+    o: common_vendor.o((...args) => $options.touchEnd && $options.touchEnd(...args)),
+    p: common_vendor.o((...args) => $options.touchEnd && $options.touchEnd(...args)),
+    q: $data.aboutVisible
+  }, $data.aboutVisible ? {
+    r: common_vendor.o((...args) => $options.hideAbout && $options.hideAbout(...args)),
+    s: common_vendor.o(() => {
+    }),
+    t: common_vendor.o((...args) => $options.hideAbout && $options.hideAbout(...args))
+  } : {});
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render]]);
 wx.createPage(MiniProgramPage);

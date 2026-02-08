@@ -162,8 +162,8 @@ page {
 }
 .joystick-base {
 		position: relative;
-		width: 225rpx; /* 扩大1.5倍 */
-		height: 225rpx; /* 扩大1.5倍 */
+		width: 337rpx; /* 扩大1.5倍 */
+		height: 337rpx; /* 扩大1.5倍 */
 		background-color: rgba(51, 51, 51, 0.5);
 		border-radius: 50%;
 		border: 2rpx solid #555555;
@@ -172,11 +172,11 @@ page {
 		position: absolute;
 		top: 50%;
 		left: 50%;
-		width: 90rpx; /* 扩大1.5倍 */
-		height: 90rpx; /* 扩大1.5倍 */
+		width: 135rpx; /* 扩大1.5倍 */
+		height: 135rpx; /* 扩大1.5倍 */
 		background-color: #00FFFF;
 		border-radius: 50%;
-		box-shadow: 0 0 15rpx #00FFFF; /* 阴影也相应扩大 */
+		box-shadow: 0 0 22rpx #00FFFF; /* 阴影也相应扩大 */
 }
 
 	/* 按钮样式 */
@@ -187,4 +187,102 @@ button {
 }
 button::after {
 		border: none;
+}
+
+	/* 标题栏右侧 */
+.header-right {
+		display: flex;
+		align-items: center;
+		gap: 20rpx;
+}
+
+	/* 关于按钮 */
+.about-btn {
+		padding: 10rpx 30rpx;
+		background-color: rgba(0, 255, 255, 0.2);
+		border: 1rpx solid #00FFFF;
+		border-radius: 30rpx;
+		color: #00FFFF;
+		font-size: 24rpx;
+}
+
+	/* 关于弹窗 */
+.about-popup {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0, 0, 0, 0.7);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		z-index: 1000;
+}
+
+	/* 弹窗内容 */
+.about-content {
+		width: 80%;
+		max-width: 600rpx;
+		background-color: #1E1E1E;
+		border: 2rpx solid #00FFFF;
+		border-radius: 20rpx;
+		padding: 40rpx;
+		box-shadow: 0 0 30rpx rgba(0, 255, 255, 0.3);
+}
+
+	/* 弹窗标题 */
+.about-title {
+		display: block;
+		font-size: 40rpx;
+		font-weight: bold;
+		color: #00FFFF;
+		text-align: center;
+		margin-bottom: 30rpx;
+		text-shadow: 0 0 10rpx #00FFFF;
+}
+
+	/* 信息区域 */
+.about-info {
+		margin-bottom: 30rpx;
+}
+
+	/* 信息项 */
+.info-item {
+		margin-bottom: 20rpx;
+}
+
+	/* 信息标签 */
+.info-label {
+		display: block;
+		font-size: 26rpx;
+		color: #888888;
+		margin-bottom: 8rpx;
+}
+
+	/* 信息值 */
+.info-value {
+		display: block;
+		font-size: 30rpx;
+		color: #00FF00;
+}
+
+	/* 描述文字 */
+.info-desc {
+		display: block;
+		font-size: 28rpx;
+		color: #CCCCCC;
+		line-height: 1.6;
+}
+
+	/* 关闭按钮 */
+.close-btn {
+		width: 100%;
+		padding: 20rpx;
+		background-color: rgba(0, 255, 255, 0.2);
+		border: 1rpx solid #00FFFF;
+		border-radius: 40rpx;
+		color: #00FFFF;
+		font-size: 32rpx;
+		font-weight: bold;
 }
