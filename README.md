@@ -143,8 +143,8 @@ npm run build
 
 **Seaton**
 
-- GitHub: [@Seaton](https://github.com/Seaton)
-- Email: seaton@example.com
+- GitHub: [@Seaton](https://github.com/seatonyang/snake_game)
+- Email: seaton.yang@foxmail.com
 
 ## 🙏 致谢
 
