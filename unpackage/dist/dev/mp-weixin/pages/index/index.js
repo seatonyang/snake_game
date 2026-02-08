@@ -98,7 +98,7 @@ const _sfc_main = {
       this.generateFood();
       this.gameState = "playing";
       if (this.gameTimer) {
-        cancelAnimationFrame(this.gameTimer);
+        clearTimeout(this.gameTimer);
       }
       this.lastTime = Date.now();
       this.gameLoop();
@@ -271,15 +271,15 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     c: common_vendor.f($data.snake, (segment, index, i0) => {
       return {
         a: index,
-        b: segment.x * $data.gridSize + "rpx",
-        c: segment.y * $data.gridSize + "rpx",
+        b: (segment.x + 0.5) * $data.gridSize + "rpx",
+        c: (segment.y + 0.5) * $data.gridSize + "rpx",
         d: $options.getSegmentColor(index)
       };
     }),
     d: $data.food
   }, $data.food ? {
-    e: $data.food.x * $data.gridSize + "rpx",
-    f: $data.food.y * $data.gridSize + "rpx"
+    e: ($data.food.x + 0.5) * $data.gridSize + "rpx",
+    f: ($data.food.y + 0.5) * $data.gridSize + "rpx"
   } : {}, {
     g: $data.gameState === "start"
   }, $data.gameState === "start" ? {

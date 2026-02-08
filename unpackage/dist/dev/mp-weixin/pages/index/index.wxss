@@ -67,20 +67,22 @@ page {
 	/* 蛇身 */
 .snake-segment {
 		position: absolute;
-		width: 20rpx;
-		height: 20rpx;
+		width: 18rpx;
+		height: 18rpx;
 		border-radius: 4rpx;
 		box-shadow: 0 0 5rpx currentColor;
+		transform: translate(-50%, -50%);
 }
 
 	/* 食物 */
 .food {
 		position: absolute;
-		width: 20rpx;
-		height: 20rpx;
+		width: 16rpx;
+		height: 16rpx;
 		background-color: #FF00FF;
 		border-radius: 50%;
 		box-shadow: 0 0 10rpx #FF00FF;
+		transform: translate(-50%, -50%);
 }
 
 	/* 游戏开始界面 */

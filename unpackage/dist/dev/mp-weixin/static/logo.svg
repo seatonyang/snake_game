@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- 蛇身渐变 -->
+    <linearGradient id="snakeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00FFFF;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#00FF00;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFFF00;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- 霓虹发光滤镜 -->
+    <filter id="neonGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <!-- 强发光滤镜 -->
+    <filter id="strongGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="12" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <!-- 网格图案 -->
+    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(0,255,255,0.1)" stroke-width="0.5"/>
+    </pattern>
+    
+    <!-- 背景渐变 -->
+    <radialGradient id="bgGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" style="stop-color:#1a1a2e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0a0a15;stop-opacity:1" />
+    </radialGradient>
+    
+    <!-- 食物渐变 -->
+    <radialGradient id="foodGradient" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" style="stop-color:#FF69B4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FF00FF;stop-opacity:1" />
+    </radialGradient>
+  </defs>
+  
+  <!-- 背景 -->
+  <circle cx="256" cy="256" r="250" fill="url(#bgGradient)" stroke="#00FFFF" stroke-width="4" filter="url(#neonGlow)"/>
+  
+  <!-- 网格背景 -->
+  <circle cx="256" cy="256" r="240" fill="url(#grid)" opacity="0.5"/>
+  
+  <!-- 边框装饰 -->
+  <circle cx="256" cy="256" r="245" fill="none" stroke="url(#snakeGradient)" stroke-width="2" opacity="0.5"/>
+  
+  <!-- 蛇身 -->
+  <g filter="url(#strongGlow)">
+    <!-- 蛇尾 -->
+    <ellipse cx="150" cy="320" rx="28" ry="22" fill="#FFFF00" transform="rotate(-30, 150, 320)"/>
+    
+    <!-- 蛇身段1 -->
+    <ellipse cx="195" cy="295" rx="30" ry="24" fill="#CCFF00" transform="rotate(-20, 195, 295)"/>
+    
+    <!-- 蛇身段2 -->
+    <ellipse cx="245" cy="275" rx="32" ry="26" fill="#99FF00" transform="rotate(-10, 245, 275)"/>
+    
+    <!-- 蛇身段3 -->
+    <ellipse cx="295" cy="265" rx="32" ry="26" fill="#66FF00" transform="rotate(0, 295, 265)"/>
+    
+    <!-- 蛇身段4 -->
+    <ellipse cx="345" cy="265" rx="30" ry="26" fill="#33FF00" transform="rotate(10, 345, 265)"/>
+    
+    <!-- 蛇头 -->
+    <ellipse cx="390" cy="285" rx="35" ry="30" fill="#00FFFF" transform="rotate(25, 390, 285)"/>
+    
+    <!-- 蛇眼睛 -->
+    <ellipse cx="405" cy="275" rx="8" ry="10" fill="#000000"/>
+    <ellipse cx="415" cy="290" rx="8" ry="10" fill="#000000"/>
+    
+    <!-- 眼睛高光 -->
+    <circle cx="407" cy="272" r="3" fill="#FFFFFF"/>
+    <circle cx="417" cy="287" r="3" fill="#FFFFFF"/>
+  </g>
+  
+  <!-- 食物（苹果） -->
+  <g filter="url(#strongGlow)" transform="translate(380, 180)">
+    <!-- 苹果主体 -->
+    <circle cx="0" cy="0" r="30" fill="url(#foodGradient)"/>
+    
+    <!-- 高光 -->
+    <ellipse cx="-10" cy="-10" rx="10" ry="8" fill="rgba(255,255,255,0.4)"/>
+    
+    <!-- 苹果梗 -->
+    <path d="M 0,-30 Q 5,-45 15,-50" stroke="#8B4513" stroke-width="4" fill="none" stroke-linecap="round"/>
+    
+    <!-- 叶子 -->
+    <ellipse cx="15" cy="-45" rx="12" ry="6" fill="#00FF00" transform="rotate(30, 15, -45)"/>
+    <ellipse cx="8" cy="-48" rx="10" ry="5" fill="#00FF00" transform="rotate(-20, 8, -48)"/>
+  </g>
+  
+  <!-- 装饰文字 -->
+  <text x="256" y="430" text-anchor="middle" font-family="Arial, sans-serif" font-size="36" font-weight="bold" fill="url(#snakeGradient)" filter="url(#neonGlow)">
+    SNAKE
+  </text>
+  
+  <!-- 装饰点 -->
+  <circle cx="180" cy="430" r="4" fill="#00FFFF" opacity="0.8"/>
+  <circle cx="332" cy="430" r="4" fill="#00FFFF" opacity="0.8"/>
+  
+  <!-- 顶部装饰 -->
+  <g transform="translate(256, 90)">
+    <path d="M -60,0 Q -30,-20 0,0 Q 30,-20 60,0" stroke="#00FFFF" stroke-width="3" fill="none" opacity="0.6" filter="url(#neonGlow)"/>
+    <circle cx="-50" cy="0" r="5" fill="#00FF00" opacity="0.8"/>
+    <circle cx="0" cy="-5" r="5" fill="#FFFF00" opacity="0.8"/>
+    <circle cx="50" cy="0" r="5" fill="#00FFFF" opacity="0.8"/>
+  </g>
+</svg>

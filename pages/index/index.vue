@@ -20,8 +20,8 @@
 				:key="index" 
 				class="snake-segment" 
 				:style="{
-					left: segment.x * gridSize + 'rpx',
-					top: segment.y * gridSize + 'rpx',
+					left: (segment.x + 0.5) * gridSize + 'rpx',
+					top: (segment.y + 0.5) * gridSize + 'rpx',
 					background: getSegmentColor(index)
 				}"
 			></view>
@@ -31,8 +31,8 @@
 				v-if="food" 
 				class="food" 
 				:style="{
-					left: food.x * gridSize + 'rpx',
-					top: food.y * gridSize + 'rpx'
+					left: (food.x + 0.5) * gridSize + 'rpx',
+					top: (food.y + 0.5) * gridSize + 'rpx'
 				}"
 			></view>
 
@@ -250,10 +250,10 @@
 				
 				// 清理旧定时器
 				if (this.gameTimer) {
-					cancelAnimationFrame(this.gameTimer);
+					clearTimeout(this.gameTimer);
 				}
 				
-				// 使用 requestAnimationFrame 实现游戏循环
+				// 使用 setTimeout 实现游戏循环
 				this.lastTime = Date.now();
 				this.gameLoop();
 			},
@@ -561,20 +561,22 @@
 	/* 蛇身 */
 	.snake-segment {
 		position: absolute;
-		width: 20rpx;
-		height: 20rpx;
+		width: 18rpx;
+		height: 18rpx;
 		border-radius: 4rpx;
 		box-shadow: 0 0 5rpx currentColor;
+		transform: translate(-50%, -50%);
 	}
 
 	/* 食物 */
 	.food {
 		position: absolute;
-		width: 20rpx;
-		height: 20rpx;
+		width: 16rpx;
+		height: 16rpx;
 		background-color: #FF00FF;
 		border-radius: 50%;
 		box-shadow: 0 0 10rpx #FF00FF;
+		transform: translate(-50%, -50%);
 	}
 
 	/* 游戏开始界面 */
